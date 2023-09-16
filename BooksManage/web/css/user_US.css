@@ -1,0 +1,45 @@
+
+/*------------------导航栏设计-----------------*/
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+.nav-bar{
+    position: relative;
+}
+
+/*-----------------关于我们的信息---------------*/
+.about-us{
+    position: absolute;
+    top:10%;
+    left: 5%;
+    padding-top:0px;
+}
+/*----------------背景设计---*/
+.bg1{
+    position: absolute;
+    left: 68%;
+    top: 15%;
+}
+
+/*-------------反馈信息-----------------*/
+.feedback{
+    position: absolute;
+    top: 280px;
+}
+

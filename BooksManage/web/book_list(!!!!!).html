@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书列表</title>
+    <link rel="stylesheet" type="text/css" href="css/book_list.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!----------------------------运行代码---------------->
+    <script>
+        $(function() {
+            const data = [];//存储json数据
+            $.post("SearchAllBookServlet",{},function (reply,status) {
+                    alert(status);
+                    const len=reply.length;
+                    for(var i=0;i<len;i++)
+                    {
+                        data.push(reply[i]);
+                    }
+                    Update()
+
+                }
+            );
+            //修改行
+            function AddRow(btn){
+                var rowdata=[];
+
+                //获取按钮所在的行
+                var row = btn.parentNode.parentNode;
+                //获取元素
+                var cells = row.cells;
+                for(var i=0;i<cells.length;i++){
+                    rowdata.push(cells[i].innerText);
+                }
+                localStorage.setItem('pre_ISBN',rowdata.at(0));
+                localStorage.setItem('bookName',rowdata.at(1));
+                localStorage.setItem('author',rowdata.at(2));
+                localStorage.setItem('publisher',rowdata.at(3));
+                localStorage.setItem('price',rowdata.at(4));
+                localStorage.setItem('description',rowdata.at(5));
+                localStorage.setItem('stock',rowdata.at(6));
+                //window.open('XiuGai_Books.html');
+                location.href="XiuGai_Books.html";
+                var tablebody = document.getElementById("table-body");
+                tablebody.appendChild(row);
+            }
+            //删除行
+            function delRow(btn){
+                var rowdata=[];
+                //获取按钮所在的行
+                var row = btn.parentNode.parentNode;
+                //获取元素
+                var cells = row.cells;
+                for(var i=0;i<cells.length-1;i++){
+                    rowdata.push(cells[i].innerText);
+                }
+                //获取表体
+                var tablebody = document.getElementById("table-body");
+                tablebody.removeChild(row);//删除行
+                $.post("DeleteBookServlet",{'ISBN':rowdata.at(0)},function (reply,status) {
+                        alert(status);
+                    }
+                );
+                data.pop();
+            }
+            //删除所有行
+            function delAllRow()
+            {
+                var tablebody = document.getElementById("table-body");
+                var childs=tablebody.childNodes;
+                for(var i=childs.length-1;i>=0;i--)
+                {
+                    data.pop();
+                    tablebody.removeChild(childs[i]);
+                }
+
+            }
+
+            function Update(){
+
+                delAllRow();
+
+                const tbody=document.getElementById("table-body")
+
+                data.forEach((item)=>{
+                    // 创建新的表格行
+                    const row = document.createElement("tr");
+
+                    // 添加数据到新行
+                    const columnOrder = ["isbn", "bookName", "author", "publisher", "price", "description", "stock"];
+                    columnOrder.forEach((propertyName) => {
+                        const value = item[propertyName];
+                        const cell = document.createElement("td");
+                        cell.textContent = value;
+                        row.appendChild(cell);
+                    });
+
+                    // 删除按钮
+                    var returnBtnCell = document.createElement("td");
+                    var returnBtn = document.createElement("button");
+                    returnBtn.textContent = "删除";
+
+                    returnBtn.addEventListener('click',function (){
+                        delRow(this);
+                    });
+                    returnBtnCell.appendChild(returnBtn);
+                    row.appendChild(returnBtnCell);
+                    //增加按钮
+                    var returnBtnCell = document.createElement("td");
+                    var returnBtn = document.createElement("button");
+
+
+                    returnBtn.textContent ="修改";
+                    returnBtn.addEventListener('click',function (){
+                        AddRow(this);
+                    });
+                    returnBtnCell.appendChild(returnBtn);
+                    row.appendChild(returnBtnCell);
+
+                    // 将表格行添加到表格的 tbody 中
+                    tbody.appendChild(row);
+                });
+
+            };
+            $("#btn1").click(function () {
+                $.post("SearchBookByISBNServlet", $("#SearchBookByISBN").serialize(), function (reply) {   //location.href = "hello.html"
+
+                    if ("flag" in reply) {
+                        alert(reply);
+
+                    } else {
+                        data.push(reply);
+                        Update();
+
+                    }
+                })
+            })
+            $("#btn2").click(function () {
+                $.post("SearchBookByNameServlet", $("#SearchBookByName").serialize(), function (reply) {   //location.href = "hello.html"
+
+                    Update();
+                    if(reply==null)
+                    {
+                        alert("查找失败");
+                    }
+                    else {
+                        var length = reply.length;
+                        for (var i = 0; i < length; i++) {
+                            alert(reply[i].bookName);
+                            data.push(reply[i]);
+                        }
+                        Update();
+                    }
+
+                })
+            })
+            $("#btn3").click(function () {
+                $.post("SearchBookByPublisherServlet", $("#SearchBookByPublisher").serialize(), function (reply) {   //location.href = "hello.html"
+                    Update();
+                    if(reply==null)
+                    {
+                        alert("查找失败");
+                    }
+                    else {
+                        var length = reply.length;
+                        for (var i = 0; i < length; i++) {
+                            alert(reply[i].bookName);
+                            data.push(reply[i]);
+                        }
+                        Update();
+                    }
+                })
+            })
+            $("#btn4").click(function () {
+                $.post("BookFuzzySearchServlet", $("#SearchBookByMoHu").serialize(), function (reply) {   //location.href = "hello.html"
+                    Update();
+                    if(reply==null)
+                    {
+                        alert("查找失败");
+                    }
+                    else {
+                        var length = reply.length;
+                        for (var i = 0; i < length; i++) {
+                            alert(reply[i].bookName);
+                            data.push(reply[i]);
+                        }
+                        Update();
+                    }
+                })
+            })
+
+        })
+    </script>
+
+</head>
+<body>
+<!-----------------查询搜索框------------------------------------------------>
+<div class="search-box-group-tips">
+    <p id="tip1" class="tip">通过书号查询</p>
+    <p id="tip2" class="tip">通过书名查询</p>
+    <p id="tip3" class="tip">通过出版社查询</p>
+    <p id="tip4" class="tip">模糊查询</p>
+</div>
+
+<div class="search-box-group">
+    <form id="SearchBookByISBN" action="SearchBookByISBNServlet" method="POST">
+        <div id="search-box1" class="search-box">
+            <input id="input1" class="search-txt" name="ISBN" type="text" placeholder="请输入书号">
+            <button id="btn1" class="search-btn"  onclick="show_res()">
+                <img class="custom-button" src="image/search.png">
+            </button>
+        </div>
+    </form>
+
+    <form id="SearchBookByName" action="SearchBookByNameServlet" method="POST">
+        <div id="search-box2" class="search-box">
+            <input id="input2" class="search-txt" name="bookName" type="text" placeholder="请输入书名">
+            <button id="btn2" class="search-btn"  onclick="show_res()">
+                <img class="custom-button" src="image/search.png">
+            </button>
+        </div>
+    </form>
+
+    <form id="SearchBookByPublisher" action="SearchBookByPublisherServlet" method="POST">
+        <div id="search-box3" class="search-box">
+            <input id="input3" class="search-txt" name="s" type="text" placeholder="请输入出版社">
+            <button id="btn3" class="search-btn"  onclick="show_res()">
+                <img class="custom-button" src="image/search.png">
+            </button>
+        </div>
+    </form>
+
+    <form id="SearchBookByMoHu" action="BookFuzzySearchServlet" method="POST">
+        <div id="search-box4" class="search-box">
+            <input id="input4" class="search-txt" name="s" type="text" placeholder="模糊查找">
+            <button id="btn4" class="search-btn"  onclick="show_res()">
+                <img class="custom-button" src="image/search.png">
+            </button>
+        </div>
+    </form>
+</div>
+
+<!---------------------导航栏----------------->
+<!--------------------------上方导航栏-------------------------------------------------->
+<div class="nav-bar">
+    <p>
+    <nav>
+        <ul>
+            <li><a href="user_page.html" title="首页" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+            <li><a href="#" title="图书列表" style="font-size: 20px;color: burlywood">图书列表</a></li>
+            <li><a href="#" title="新增图书" style="font-size: 20px;color: #2f3640">新增图书</a></li>
+            <li><a href="#" title="借阅记录" style="font-size: 20px;color: #2f3640">借阅记录</a></li>
+            <li><a href="#" title="用户列表" style="font-size: 20px;color: #2f3640">用户列表</a> </li>
+            <li><a href="#" title="新增用户" style="font-size: 20px;color: #2f3640">新增记录</a> </li>
+        </ul>
+    </nav>
+    </p>
+</div>
+
+<!----------------------------结果表------------------------------------------------->
+<div>
+    <table class="my-table">
+        <thead>
+        <tr><!--表头-->
+            <th>书号(ISBN)</th>
+            <th>书名(BookName)</th>
+            <th>作者(Author)</th>
+            <th>出版社(publisher)</th>
+            <th>价格(price)</th>
+            <th>内容简介(content)</th>
+            <th>库存(stock)</th>
+            <th>删除(delete)</th>
+            <th>修改(revise)</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

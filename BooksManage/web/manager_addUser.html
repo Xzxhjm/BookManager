@@ -1,0 +1,82 @@
+
+<!--------------------------------------------添加用户(管理员)--------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户(管理员)</title>
+    <link rel="stylesheet" type="text/css" href="css/manager_addUser.css">
+    <script src="js/manager_addUser.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            $("#tijiao").click(function () {
+                $.post("AddUserServlet", $("#AddUser").serialize(), function (data) {   //location.href = "hello.html"
+                    if (data.flag) {
+                        alert("添加成功");
+                        location.href = "manager_userList.html";
+                    } else {
+                        alert("添加失败");
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+
+<!--开始————————————————————————————————————————————————————-->
+<body>
+<!--------------------------上方导航栏------------------------>
+<p>
+<nav>
+    <ul>
+        <li><a href="manager_page.html" title="首页" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+        <li><a href="manager_bookList.html" title="图书列表" style="font-size: 20px;color: #2f3640">图书列表</a></li>
+        <li><a href="manager_addBooks.html" title="新增图书" style="font-size: 20px;color: #2f3640">新增图书</a></li>
+        <li><a href="manager_borrowRecord.html" title="借阅记录" style="font-size: 20px;color: #2f3640">借阅记录</a></li>
+        <li><a href="manager_userList.html" title="用户列表" style="font-size: 20px;color: #2f3640">用户列表</a> </li>
+        <li><a href="manager_addUser.html" title="新增用户" style="font-size: 20px;color: burlywood">新增用户</a> </li>
+    </ul>
+</nav>
+</p>
+
+<!--搜索框 ---------------------------------->
+
+
+<!--已经借阅的书籍---用于续借操作-------------------------->
+<div class="table-container">
+    <!--结果表------------------------------------>
+    <div class="wrap">
+        <div class="login-wrap">
+            <div class="login-title">
+                添加用户信息
+            </div>
+            <form target="form" id="AddUser" action="AddBookServlet" method="POST">
+                <div class="login-form">
+                    <div class="login-title1">
+                        <div>用 户 账 号 :<input  type="text" name="username"  class="login-input"> </div>
+                        <div>用 户 密 码 :  <input  type="text" name="password"  class="login-input"></div>
+                        <div>用 户 姓 名 :  <input  type="text" name="name"  class="login-input"></div>
+                        <div>用 户 电 话 :  <input  type="text" name="phone"  class="login-input"></div>
+                        <div>用 户 邮 箱  :  <input  type="text" name="email"  class="login-input"></div>
+                        <input type="button" name="提交" value="提交" id="tijiao" class="login-submit"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ----------------------------------- 插入视频----------------->
+<!--
+<div class="my-video">
+    <video src="image/shuimo.mp4" width="1500" height="600" autoplay loop muted></video>
+</div>
+-->
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+
+<!---------------------------------------------------修改图书-------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改图书</title>
+    <link rel="stylesheet" type="text/css" href="css/manager_bookList_change.css">
+    <script src="js/manager_bookList_change.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+
+            $("#tijiao").click(function () {
+                $.post("UpdateBookServlet", $("#XiuGaiBook").serialize(), function (data) {   //location.href = "hello.html"
+                    if (data.flag) {
+                        alert("修改成功");
+                        location.href = "manager_bookList.html";
+                    } else {
+                        alert("修改失败");
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+
+<!--开始————————————————————————————————————————————————————-->
+<body>
+<!--------------------------上方导航栏------------------------>
+<p>
+<nav>
+    <ul>
+        <li><a href="manager_page.html" title="首页" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+        <li><a href="manager_bookList.html" title="图书列表"  style="font-size: 20px;color: #2f3640">图书列表</a></li>
+        <li><a href="manager_bookList_change.html" title="修改图书"  style="font-size: 20px;color: coral">修改图书</a></li>
+    </ul>
+</nav>
+</p>
+
+<!--搜索框 ---------------------------------->
+
+
+<!--已经借阅的书籍---用于续借操作-------------------------->
+<div class="table-container">
+
+    <!--结果表------------------------------------>
+    <div class="wrap">
+        <div class="login-wrap">
+            <div class="login-title">
+                修改图书信息
+            </div>
+            <form target="form" id="XiuGaiBook" action="UpdateBookServlet" method="POST">
+                <div class="login-form">
+                    <div class="login-title1">
+                        <div>书 籍 编 号 :<input  type="text" name="post_ISBN"  class="login-input" id="post_ISBN"> </div>
+                        <div>书 籍 名 称 :  <input  type="text" name="bookName"  class="login-input" id="bookName"></div>
+                        <div>作 者 名 称 :  <input  type="text" name="author"  class="login-input" id="author"></div>
+                        <div>出版社名称 :  <input  type="text" name="publisher"  class="login-input" id="publisher"></div>
+                        <div>图书价格  :  <input  type="text" name="price"  class="login-input" id="price"></div>
+                        <div>图书描述  :  <input  type="text" name="description"  class="login-input" id="description"></div>
+                        <div>图书库存  :  <input  type="text" name="stock"  class="login-input" id="stock"></div>
+                        <div><input  type="text" name="pre_ISBN"  id="pre_ISBN"></div> <!---隐藏起来的pre_ISBN---->
+                        <input type="button" name="提交" value="提交" id="tijiao" class="login-submit"/>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

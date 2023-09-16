@@ -1,0 +1,70 @@
+
+body{
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../image/B_books2.jpg");
+    background-repeat: no-repeat;
+}
+
+/*--------------------导航栏设计---------------*/
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+.nav-bar{
+    position: absolute;
+    top: 20px;
+    left: 180px;
+}
+
+/*--------续借表----------------*/
+/*表格----------------------------------------------------*/
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.table-container{
+    position: relative;
+}
+.my-table{/*续借表*/
+    position: absolute;
+    width: 1200px;
+    height: 200px;
+    left: 50%;
+    top: 200px;
+    transform: translate(-50%);
+}
+.tip1{
+    position: absolute;
+    top: 100px;
+    left: 600px;
+}

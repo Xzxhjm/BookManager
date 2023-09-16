@@ -1,0 +1,32 @@
+user:   username(primary key)
+        password
+        name
+        phone
+        email
+
+admin:  username(primary key)
+        password
+        name
+        phone
+        email
+
+book:   ISBN(primary key)
+        bookName
+        author
+        publisher
+        price
+        description
+        stock(int)
+
+borrow: borrowID(primary key)(int)
+        ISBN
+        bookName
+        borrowerName
+        borrowDate
+        ddl
+        returnDate
+        status(int)      0:未还 1:已还
+
+feedback:id(primary key)(int)
+        username
+        content

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户界面</title>
+
+    <script type="text/javascript" src="js/user_page.js"></script>
+    <link href="css/user_page.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!--------------------------上方导航栏------------------------>
+<div class="nav-bar">
+    <p><nav>
+    <ul>
+        <li><a href="user_page.html" title="首页" style="font-size: 25px;color: chartreuse">首页</a></li>
+        <li><a id="a1" href="user_bookList.html" title="功能大厅" target="_blank" style="font-size: 25px;color: #2f3640">功能大厅</a> </li>
+        <li><a id="a2" href="user_personal_info_data.html" title="个人信息" target="_blank" style="font-size: 25px;color: #2f3640">个人信息</a></li>
+        <li><a href="user_US.html" title="联系我们" target="_blank" style="font-size: 25px;color: #2f3640">联系我们</a></li>
+        <div class="dropdown">
+            <span><a id="user_info" title="用户信息" style="font-size: 25px;color: #2f3640">未登录</a></span>
+            <div class="dropdown-content">
+                <a href="start_page.html" style="font-size: 20px;color: #2f3640">退出登录</a>
+            </div>
+        </div>
+
+    </ul>
+</nav>
+    </p>
+</div>
+<!----------------------------背景------------------------>
+<div class="background1">
+</div>
+<!-------------------------------下方三兄贵------------>
+<div class="info">
+    <p><a style="color: #2f3640;font-size: 20px;padding-left: 20px;font-style: oblique" href="http://www.nlc.cn" target="_blank">才须学也。非学无以广才，非志无以成学</a></p>
+    <p><a style="color: #2f3640;font-size: 20px;padding-left: 20px;font-style: oblique" href="http://cnpeak.com" target="_blank">书籍是人类进步的阶梯</a></p>
+    <p><a style="color: #2f3640;font-size: 20px;padding-left: 20px;font-style: oblique" href="https://libx.xmu.edu.cn" target="_blank">笔落惊风雨，诗成泣鬼神</a></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p style="color: #2f3640;font-size: 20px;padding-left: 20px;font-style: oblique;font-weight: bold">
+        正值青春年华的我们，总会一次次不知觉望向远方，对远方的道路充满憧憬，尽管忽隐忽现，充满迷茫。有时候身边就像被浓雾紧紧包围，那种迷茫和无助只有自己能懂。尽管有点孤独，尽管带着迷茫和无奈，但我依然勇敢地面对，
+        因为这就是我的青春，不是别人的，只属于我的。--挪威的森林</p>
+
+</div>
+<div class="image-group">
+    <img src="image/1.png" onclick="to_B_books()">
+    <img src="image/2.png" onclick="to_R_Books()">
+    <img src="image/3.png" onclick="to_search()">
+</div>
+
+<!-- ----------------------------------- 插入视频----------------->
+<div class="my-video">
+    <video src="image/XMUlibrary.mp4" width="1200" height="600" autoplay loop muted></video>
+</div>
+
+<!-----------------------------轮播图片------------------->
+<div class="bg1">
+    <img id="pg1" class="mySlides" src="image/xmu6.jpg" width="400" height="600">
+</div>
+
+
+</body>
+</html>

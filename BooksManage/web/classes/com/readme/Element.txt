@@ -1,0 +1,42 @@
+User类：
+username(用户名)                        String                       primary key
+password(密码)                         String
+name(真实姓名)                          String
+phone(电话号码)                         String
+email(电子邮件)                         String
+
+Admin类
+username(用户名)                       String                       primary key
+password(密码)                         String
+name(真实姓名)                          String
+phone(电话号码)                         String
+email(电子邮件)                         String
+
+Book类
+ISBN(书号)                            String                        primary key
+bookName(书名)                        String
+author(作者)                          String
+publisher(出版社)                      String
+price(价格)                           String
+description(描述)                     String
+stock(库存)                           int
+
+BorrowBook类
+borrowID(借书编号)                    int                           primary key
+ISBN(书号)                            String
+bookName(书名)                        String
+borrowerName(借书人姓名)               String
+borrowDate(借书日期)                  String
+ddl(截止日期)                         String
+returnDate(还书日期)                  String                        为空表示未还
+status(借书状态)                      int                           0表示未还，1表示已还
+
+Result类（用于返回结果）
+flag                                boolean                         true表示成功，false表示失败
+Msg                                 String                          返回的信息
+username                            String                          用户名
+
+Feedback
+id                                  int
+username                            String
+content                             String

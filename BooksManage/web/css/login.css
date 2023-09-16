@@ -1,0 +1,52 @@
+body{
+    background-image: url("../image/denglu.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+.show {
+    background: rgba(12, 11, 11, 0.7);
+    border-radius: 20px;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left:0;
+    right:0;
+    bottom:0;
+    display: block;
+}
+.hidden {
+    background: rgba(12, 11, 11, 0.7);
+    border-radius: 20px;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display:none;
+}
+.p{
+    font-family:华文楷体 ;
+    font-size: xx-large;
+    text-align: center;
+    color:rgb(245, 244, 239);
+
+}
+.h{
+    font-family: 华文楷体;
+    font-size:xx-large;
+    text-align: center;
+    color:rgb(245, 244, 239);
+
+}
+.button
+{
+    background-color: white;
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借阅记录(用户)</title>
+    <link rel="stylesheet" type="text/css" href="css/user_borrowRecord.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            const data = [];//存储json数据
+            //const borrowerName=localStorage.getItem('username');
+            //获取当前用户信息:
+            const borrowerName=localStorage.getItem("xzx_name");
+            $.post("SearchBorrowByUserServlet",{'borrowerName':borrowerName},function (reply,status) {
+                    //alert(status);
+                    //alert(reply[0].isbn+reply[0].borrowID+reply[0].borrowerName+reply[0].borrowDate+reply[0].ddl+reply[0].returnDate+reply[0].status);
+                    const len=reply.length;
+                    for(var i=0;i<len;i++)
+                    {
+                        data.push(reply[i]);
+                    }
+                    Update()
+
+                }
+            );
+
+
+            //处理续借行
+            function DealRow(obj){
+                const btnLine = obj.parentNode.parentNode;//获取按钮所在行
+
+                const rowData = {//该行数据
+                    borrowID:btnLine.cells[0].innerText,
+                    ISBN:btnLine.cells[1].innerText,
+                    bookName:btnLine.cells[2].innerText,
+                    borrowerName:btnLine.cells[3].innerText,
+                    borrowDate: btnLine.cells[4].innerText,
+                    ddl:btnLine.cells[5].innerText,
+                    returnDate:btnLine.cells[6].innerText,
+                    status:btnLine.cells[7].innerText,
+                };
+
+                //-------------------------数据更新!!!!!!!!!!!!!!!!!!!!!
+
+                $.post("RenewBookServlet",{'borrowID':rowData.borrowID},function(reply,status){
+                    if(reply.flag)
+                    {   alert("续借成功");
+                        location.href="user_borrowRecord.html";
+                    }
+                    else
+                    {
+                        alert("续借失败");
+                    }
+
+                })
+                // 格式化更新后的日期
+
+
+
+                //alert("您已经成功续借");
+            }
+            function ReturnRow(obj)
+            {
+                const btnLine = obj.parentNode.parentNode;//获取按钮所在行
+
+                const rowData = {//该行数据
+                    borrowID:btnLine.cells[0].innerText,
+                    ISBN:btnLine.cells[1].innerText,
+                    bookName: btnLine.cells[2].innerText,
+                    borrowerName:btnLine.cells[3].innerText,
+                    borrowDate: btnLine.cells[4].innerText,
+                    ddl:btnLine.cells[5].innerText,
+                    returnDate:btnLine.cells[6].innerText,
+                    status:btnLine.cells[7].innerText,
+                };
+
+                //-------------------------数据更新!!!!!!!!!!!!!!!!!!!!!
+
+                $.post("ReturnBookServlet",{'borrowID':rowData.borrowID},function(reply,status){
+                    if(reply.flag)
+                    {   alert("退还成功");
+                        location.href="user_borrowRecord.html";
+                    }
+                    else
+                    {
+                        alert("退还失败");
+                    }
+
+                })
+            }
+
+
+
+            function Update(){
+
+
+                const tbody=document.getElementById("table-body")
+
+                data.forEach((item)=>{
+                    // 创建新的表格行
+                    const row = document.createElement("tr");
+                    //将status=1转换为 已归还
+                    const hasButton=item.status;
+                    if(item.status===1)
+                    {
+                        item.status='已归还'
+                    }
+                    else
+                    {
+                        item.status='未归还'
+                    }
+                    // 添加数据到新行
+
+                    const columnOrder = ["borrowID","isbn","bookName", "borrowerName", "borrowDate", "ddl", "returnDate","status"];
+                    columnOrder.forEach((propertyName) => {
+
+                        const value = item[propertyName];
+                        const cell = document.createElement("td");
+
+                        cell.textContent = value;
+                        row.appendChild(cell);
+                    });
+
+                    if(hasButton===1) {
+                        //增加为空
+                        var returnBtnCell1 = document.createElement("td");
+                        var returnBtnCell2 = document.createElement("td");
+                        row.appendChild(returnBtnCell1);
+                        row.appendChild(returnBtnCell2);
+                    }
+                    else
+                    {
+                        //增加按钮
+                        var returnBtnCell = document.createElement("td");
+                        var returnBtn = document.createElement("button");
+
+
+                        returnBtn.textContent = "续借";
+                        returnBtn.addEventListener('click', function () {
+                            DealRow(this);
+                        });
+                        returnBtnCell.appendChild(returnBtn);
+                        row.appendChild(returnBtnCell);
+
+                        //退还按钮
+                        var returnBtnCell = document.createElement("td");
+                        var returnBtn = document.createElement("button");
+
+
+                        returnBtn.textContent = "归还";
+                        returnBtn.addEventListener('click', function () {
+                            ReturnRow(this);
+                        });
+                        returnBtnCell.appendChild(returnBtn);
+                        row.appendChild(returnBtnCell);
+                    }
+                    // 将表格行添加到表格的 tbody 中
+                    tbody.appendChild(row);
+                });
+            };
+        })
+    </script>
+</head>
+<body>
+
+<div class="background1">
+</div>
+<!---------------------------导航栏--------------------->
+<!--------------------------上方导航栏-------------------------------------------------->
+<div class="nav-bar">
+    <p>
+    <nav>
+        <ul>
+            <li><a href="user_page.html" title="功能大厅(用户)" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+            <li><a href="user_bookList.html" title="功能大厅(用户)" style="font-size: 20px;color: #2f3640">图书列表</a></li>
+            <li><a href="user_borrowRecord.html" title="功能大厅(用户)" style="font-size: 20px;color: coral">借阅记录</a></li>
+        </ul>
+    </nav>
+    </p>
+</div>
+
+<!--------------------------续借界面----------------->
+<!--已经借阅的书籍---用于续借操作-------------------------->
+<div class="table-container">
+    <table class="my-table">
+        <thead>
+        <tr>
+            <p  style="color: #988fc7;font-size: 20px" class="tip1">您已经借阅的书籍信息如下：</p>
+            <th>借阅号(borrowID)</th>
+            <th>图书编号(ISBN)</th>
+            <th>书名(bookName)</th>
+            <th>借书人姓名(borrowerName)</th>
+            <th>借书日期(borrowDate)</th>
+            <th>归还限制日期(ddl)</th>
+            <th>归还日期(returnDate)</th>
+            <th>归还状态(status)</th>
+            <th>是否续借</th>
+            <th>是否退还</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

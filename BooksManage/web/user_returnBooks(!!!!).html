@@ -1,0 +1,53 @@
+
+<!---------------------------------------------------当前为还书界面-------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>功能大厅(用户)</title>
+    <link rel="stylesheet" type="text/css" href="css/user_returnBooks.css">
+    <script src="js/user_returnBooks.js"></script>
+</head>
+
+
+<body>
+
+<!--------------------------上方导航栏------------------------>
+<!--------------------------上方导航栏-------------------------------------------------->
+<div class="nav-bar">
+    <p>
+    <nav>
+        <ul>
+            <li><a href="user_page.html" title="功能大厅(用户)" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+            <li><a href="user_bookList.html" title="功能大厅(用户)" style="font-size: 20px;color: #2f3640">图书列表</a></li>
+            <li><a href="user_returnBooks(!!!!).html" title="功能大厅(用户)" style="font-size: 20px;color: coral">图书退还</a></li>
+            <li><a href="user_borrowRecord.html" title="功能大厅(用户)" style="font-size: 20px;color: #2f3640">借阅记录</a></li>
+        </ul>
+    </nav>
+    </p>
+</div>
+
+    <div class="user-info">
+        <p class="info" style="color: #988fc7;font-size: 20px;font-style: oblique">您已借书籍信息如下：</p>
+    </div>
+
+<div>
+    <table class="my-table" id="myTable">
+        <tbody id="table-body">
+        <thead>
+        <tr><!--表头-->
+            <th>书号(ISBN)</th>
+            <th>书名(BookName)</th>
+            <th>作者(Author)</th>
+            <th>借书日期(b_date)</th>
+            <th>归还限制日期(ddl)</th>
+            <th>是否选择归还</th>
+        </tr>
+        </thead>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎你，请先登陆！</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script>
+        $(function()
+        {
+            $("#btn").click(function()
+            {
+
+                $.post("UserLogInServlet",$("#UserLogInForm").serialize(),function(data)
+                {
+                    if(data.flag)
+                    {
+                        alert("登录成功");
+                        localStorage.setItem("name",data.name);//存下用户名
+                        //用户信息记录
+                        var username = document.getElementById("username").value;
+                        localStorage.setItem("xzx_name",username);
+
+                        localStorage.setItem("username",username);
+
+                        location.href = "user_page.html";
+                    }
+                    else
+                    {
+                        alert("登陆失败");
+                        location.href = "login.html";
+                    }
+                })
+            })
+
+            $("#zhuce").click(function()
+            {
+                location.href="register.html";
+            })
+            //管理员没有注册
+            $("#btn1").click(function()
+            {
+
+                $.post("AdminLogInServlet",$("#AdminLogInForm").serialize(),function(data)
+                {
+                    if(data.flag)
+                    {
+                        alert("登录成功");
+                        localStorage.setItem("name",data.name);//存下管理员名
+                        //管理员信息记录
+                        var managername = document.getElementById("managername").value;
+                        localStorage.setItem("xzx_name",managername);
+
+                        localStorage.setItem("username",managername);
+
+                        location.href ="manager_page.html";
+                    }
+                    else
+                    {
+                        alert("登录失败");
+                        location.href = "login.html"
+                    }
+                })
+            })
+
+        })
+
+    </script>
+</head>
+<body>
+
+<div class="show" id="container0">
+    <input type="button" value="切换为管理员" onclick="showDiv()" />
+    <div >
+        <h2 class="h">用户登陆</h2>
+    </div>
+    <form id="UserLogInForm" action="UserLogInServlet" method="post">
+        <p class="p">账号:
+            <input id="username" name="username" type="text" placeholder="请输入用户名" style="width:200px;height: 25px">
+        </p>
+        <p class="p">密码:
+            <input  name="password" type="text" placeholder="请输入密码" style="width:200px;height: 25px">
+        </p>
+        <input style="margin-left:180px;margin-top:10px;width:200px;height: 30px" type="button" name="btn" id="btn" value="登录"/>
+        <input style="margin-left:180px;margin-top:10px;width:200px;height: 30px" type="button" name="zhuce"  id="zhuce" value="注册"/>
+    </form>
+
+</div>
+<div class="hidden" id="container1">
+    <input type="button" value="切换为用户" onclick="showDiv()" />
+    <div >
+        <h2 class="h">管理员登陆</h2>
+    </div>
+    <form id="AdminLogInForm" action="AdminLogInServlet" method="post">
+        <p class="p">账号:
+            <input  id="managername" name="username" type="text" placeholder="请输入用户名" style="width:200px;height: 25px">
+        </p>
+        <p class="p">密码:
+            <input  name="password" type="text" placeholder="请输入密码" style="width:200px;height: 25px">
+        </p>
+        <input style="margin-left:180px;margin-top:10px;width:200px;height: 30px" type="button" name="btn1" id="btn1" value="登录"/>
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借阅记录(管理员)</title>
+    <link rel="stylesheet" type="text/css" href="css/manager_borrowRecord.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            const data = [];//存储json数据
+
+            $.post("SearchAllBorrowServlet",{},function (reply,status) {
+                    //alert(status);
+                    //alert(reply[0].isbn+reply[0].borrowID+reply[0].borrowerName+reply[0].borrowDate+reply[0].ddl+reply[0].returnDate+reply[0].status);
+                    const len=reply.length;
+                    for(var i=0;i<len;i++)
+                    {
+                        data.push(reply[i]);
+                    }
+                    Update()
+                    for(var i=0;i<len;i++)
+                    {
+                        data.pop();
+                    }
+                }
+            );
+            function delAllRow()
+            {
+                var tablebody = document.getElementById("table-body");
+                var childs=tablebody.childNodes;
+                /*if(isSuccess===1) {
+                    var temp = data[data.length - 1];//把查找到的用户保留下来
+                }*/
+                for(var i=childs.length-1;i>=0;i--)
+                {   //alert("del"+i)
+
+                    tablebody.removeChild(childs[i]);
+                }
+                /*if(isSuccess===1) {
+                    data.push(temp);
+                }*/
+
+            }
+
+            function Update(){
+                const tbody=document.getElementById("table-body")
+                data.forEach((item)=>{
+                    // 创建新的表格行
+                    const row = document.createElement("tr");
+
+                    // 添加数据到新行
+
+                    const columnOrder = ["borrowID","isbn", "bookName","borrowerName", "borrowDate", "ddl", "returnDate","status"];
+                    columnOrder.forEach((propertyName) => {
+                        const value = item[propertyName];
+                        const cell = document.createElement("td");
+                        cell.textContent = value;
+                        row.appendChild(cell);
+                    });
+
+
+
+                    // 将表格行添加到表格的 tbody 中
+                    tbody.appendChild(row);
+                });
+                //delAllRow();
+
+            };
+            $("#submitBorrow").click(function (event) {
+                event.preventDefault(); // 取消表单的默认提交行为!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                //alert("查询")
+                $.post("SearchBorrowServlet", $("#SearchBorrow").serialize(), function (reply) {   //location.href = "hello.html"
+                    alert("查找成功")
+                    if ("flag" in reply) {
+                        alert("查找失败");
+                        //Update();
+                        delAllRow();
+                    } else {
+                        delAllRow();
+                        data.push(reply);
+                        Update();
+                        data.pop(reply);
+                    }
+                })
+            })
+            $("#submitBorrowerName").click(function (event) {
+                event.preventDefault(); // 取消表单的默认提交行为!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                $.post("SearchBorrowByUserServlet", $("#SearchBorrowerName").serialize(), function (reply) {   //location.href = "hello.html"
+                    alert("查找成功")
+                    if ("flag" in reply) {
+                        alert("查找失败");
+                        //Update();
+                        delAllRow();
+                    } else {
+                        delAllRow();
+                        const len=reply.length;
+                        for(var i=0;i<len;i++)
+                        {
+                            data.push(reply[i]);
+                        }
+                        Update();
+
+                        for(var i=0;i<len;i++)
+                        {
+                            data.pop();
+                        }
+                    }
+                })
+            })
+
+
+        })
+    </script>
+</head>
+<body>
+
+<!---------------------导航栏----------------->
+<!--------------------------上方导航栏-------------------------------------------------->
+<div class="nav-bar">
+    <p>
+    <nav>
+        <ul>
+            <li><a href="manager_page.html" title="首页" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+            <li><a href="manager_bookList.html" title="图书列表" style="font-size: 20px;color: #2f3640">图书列表</a></li>
+            <li><a href="manager_addBooks.html" title="新增图书" style="font-size: 20px;color: #2f3640">新增图书</a></li>
+            <li><a href="manager_borrowRecord.html" title="借阅记录" style="font-size: 20px;color: burlywood">借阅记录</a></li>
+            <li><a href="manager_userList.html" title="用户列表" style="font-size: 20px;color: #2f3640">用户列表</a> </li>
+            <li><a href="manager_addUser.html" title="新增用户" style="font-size: 20px;color: #2f3640">新增用户</a> </li>
+        </ul>
+    </nav>
+    </p>
+</div>
+
+<div style="position:absolute;left:600px;top:100px">
+    <form id="SearchBorrow" action="SearchBorrowServlet" method="POST">
+        <div id="search-box1" class="search-box">
+            <input type="text" placeholder="输入借阅号查找" name="borrowID" class="search-txt">
+            <button id="submitBorrow" class="search-btn">
+                <img class="custom-button" src="image/search.png">
+            </button>
+        </div>
+    </form>
+
+    <form id="SearchBorrowerName" action="SearchBorrowByUserServlet" method="POST">
+        <div id="search-box2" class="search-box">
+            <input type="text" placeholder="输入借阅人查找" name="borrowerName" class="search-txt">
+            <button id="submitBorrowerName" class="search-btn">
+                <img class="custom-button" src="image/search.png">
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<!--结果表------------------------------------>
+<div>
+    <table class="res-table">
+        <thead>
+        <tr><!--表头-->
+            <th>借阅ID(borrowID)</th>
+            <th>书号(ISBN)</th>
+            <th>书名(bookName)</th>
+            <th>借阅人(borrowerName)</th>
+            <th>借阅日期(borrowDate)</th>
+            <th>截止日期(ddl)</th>
+            <th>归还日期(returnDate)</th>
+            <th>状态(status)</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+</html>

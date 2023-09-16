@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息(修改)</title>
+    <script src="js/user_personal_info_change.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            const username=localStorage.getItem("username");
+            //const username='123';//用于测试案例
+            $.post("SearchUserServlet",{'username':username}, function (data) {   //location.href = "hello.html"
+                //alert("你好！"+data.name)
+                localStorage.setItem('username',data.username);
+                localStorage.setItem('password',data.password);
+                localStorage.setItem('realname',data.name);
+                localStorage.setItem('name',data.name);//函数不同，引用的不同
+                localStorage.setItem('phone',data.phone);
+                localStorage.setItem('email',data.email);
+                ShowMessage();
+            })
+            $("#save-btn").click(function (){
+                    alert("正在保存");
+                    const pre_username=localStorage.getItem("username");
+                    const post_username=document.getElementById('1').value;
+                    const password=document.getElementById('2').value;
+                    const name=document.getElementById('3').value;
+                    const phone=document.getElementById('4').value;
+                    const email=document.getElementById('5').value;
+                    $.post("UpdateUserServlet",{'pre_username':pre_username,'post_username':post_username,'password':password,'name':name,'phone':phone,'email':email},function(data){
+                        if(data.flag)
+                        {
+                            alert("保存成功")
+                            localStorage.setItem('username',data.username);
+                            location.href="user_personal_info_data.html";
+                            //const user_info = document.getElementById("user_info");
+                            // user_info.innerText = username+",你好!";
+                        }
+                        else
+                        {
+                            alert("保存失败")
+
+                        }
+
+                    })
+                }
+            )
+            function ShowMessage()
+            {
+                const username = localStorage.getItem("name");
+                const user_info = document.getElementById("user_info");
+                document.getElementById('1').value=localStorage.getItem("username");
+                document.getElementById('2').value=localStorage.getItem("password");
+                document.getElementById('3').value=localStorage.getItem("realname");
+                document.getElementById('4').value=localStorage.getItem("phone");
+                document.getElementById('5').value=localStorage.getItem("email");
+                if(username!=null)
+                    user_info.innerText = username+",你好!";
+            }
+        })
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/user_personal_info_change.css">
+
+</head>
+<body>
+<!------------------------导航栏------------------>
+<div class="nav-bar">
+    <p>
+    <nav>
+        <ul>
+            <li><a href="user_page.html" title="首页" style="font-size: 25px;color: #2f3640">首页</a></li>
+            <li><a href="user_bookList.html" title="功能大厅" target="_blank" style="font-size: 25px;color: #2f3640">功能大厅</a> </li>
+            <li><a href="user_personal_info_change.html" title="个人信息" style="font-size: 25px;color: chocolate">个人信息</a></li>
+            <li><a href="user_US.html" title="联系我们" style="font-size: 25px;color: #2f3640">联系我们</a></li>
+        </ul>
+    </nav>
+    </p>
+</div>
+
+<!------------------------个人信息        当前是“点击修改”界面---------------->
+<div class="personal_info">
+    <h1>您的个人信息:</h1>
+    <a id="a_2_2" href="user_personal_info_data.html" title="个人资料" style="font-size: 25px;color: #2f3640">个人资料</a>
+    <a id="a_2_1" href="user_personal_info_change.html" title="点击修改" style="font-size: 25px;color:burlywood;font-weight: bold">点击修改</a>
+
+    <div class="info">
+        <p class="pl">
+            <label  class="label_style">用户姓名:</label>
+            <input type="text" style="color: #999999;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" id="1"></p>
+        <p class="pl">
+            <label  class="label_style">密码:</label>
+            <input type="text" style="color: #999999;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" id="2"></p>
+        <p class="pl">
+            <label  class="label_style">您的真实姓名:</label>
+            <input type="text" style="color: #999999;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" id="3"></p>
+        <p class="pl">
+            <label  class="label_style">您的联系电话:</label>
+            <input type="text" style="color: #999999;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" id="4"></p>
+        <p class="pl">
+            <label  class="label_style">您的电子邮件:</label>
+            <input type="text" style="color: #999999;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" id="5"></p>
+        <p class="pl"><input id="save-btn" type="button" value="保存" style="font-size: 20px "></p>
+    </div>
+</div>
+<!--------------------------------背景设计------------>
+<div class="pubu">
+    <img src="image/pubu.gif" height="600" width="400">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+/*-----------背景设计---------*/
+body{
+    background-image: url("../image/B_books2.jpg");
+    background-size: cover;
+}
+
+/*搜索框设计-----------------------------------------*/
+.search-box{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: flex-end;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:#2f3640;
+    height: 38px;
+    border-radius: 60px;
+    padding: 10px;
+}
+
+.search-box:hover > .search-txt{
+    width: 240px;
+    padding: 0 6px;
+}
+
+.search-box:hover > .search-btn{
+    background: white;
+}
+
+.search-btn{
+    margin-left: 10px;
+    color: #988fc7;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.search-txt{
+    border:none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+image.custom-icon{
+    width: 30px;
+    height: 30px;
+    fill: red;
+    transition: color 0.3s;
+}
+image.custom-icon:hover{
+    fill: cadetblue;
+}
+/*--------------搜索框位置-----------*/
+#search-box1{
+    position: absolute;
+    top: 150px;
+    left: 300px;
+}
+#search-box2{
+    position: absolute;
+    top: 150px;
+    left: 600px;
+}
+#search-box3{
+    position: absolute;
+    top: 150px;
+    left: 900px;
+}
+#search-box4{
+    position: absolute;
+    top: 150px;
+    left: 1200px;
+}
+/*--------------------搜索框tips------------*/
+.tip{
+    color: #2f3640;
+    font-size: 20px;
+    font-style: oblique;
+    font-weight: bold;
+}
+#tip1{
+    position: absolute;
+    top: 170px;
+    left: 240px;
+}
+#tip2{
+    position: absolute;
+    top: 170px;
+    left: 540px;
+}
+#tip3{
+    position: absolute;
+    top: 170px;
+    left: 840px;
+}
+#tip4{
+    position: absolute;
+    top: 170px;
+    left: 1140px;
+}
+
+/*--------------------导航栏设计---------------*/
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+.nav-bar{
+    position: absolute;
+    top: 20px;
+    left: 180px;
+}
+
+/*表格----------------------------------------------------*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.my-table{
+    position: absolute;
+    justify-content: center;
+    top: 280px;
+    left: 150px;
+    width:1200px;
+}

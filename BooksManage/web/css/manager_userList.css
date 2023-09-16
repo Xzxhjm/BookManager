@@ -1,0 +1,162 @@
+
+body{
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../image/bg8.jpg");
+    background-repeat: no-repeat;
+}
+/*----------导航栏设计--------------*/
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+
+/*搜索框设计-----------------------------------------*/
+.search-box{
+    position: absolute;
+    top: 30px;
+    left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transform: translate(-50%,-50%);
+    background:#2f3640;
+    height: 38px;
+    border-radius: 60px;
+    padding: 10px;
+}
+
+.search-box:hover > .search-txt{
+    width: 240px;
+    padding: 0 6px;
+}
+
+.search-box:hover > .search-btn{
+    background: white;
+}
+
+.search-btn{
+    margin-left: 10px;
+    color: #988fc7;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.search-txt{
+    border:none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+image.custom-icon{
+    width: 30px;
+    height: 30px;
+    fill: red;
+    transition: color 0.3s;
+}
+image.custom-icon:hover{
+    fill: cadetblue;
+}
+
+/*菜单设计----------------------------------------------------*/
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-input {
+    width: 200px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#search-option {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#search-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+/*搜索结果*/
+.search-result {
+    margin-top: 20px;
+}
+
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.book-table th,
+.book-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+/*表格----------------------------------------------------*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.my-table{
+    position: absolute;
+    justify-content: center;
+    top: 200px;
+    left: 200px;
+    width:1000px;
+}
+.Input
+{
+    display: inline-block;
+}
+
+

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>用户反馈管理</title>
+  <link rel="stylesheet" type="text/css" href="css/manager_feedback.css">
+  <script src="js/manager_feedback.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/modernizr.js"></script>
+  <script src="js/vue.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <style>
+    body{
+      background-image: url("image/B_books2.jpg");
+      background-size: cover;
+    }
+    textarea{
+      margin-bottom: 20px;
+    }
+  </style>
+    <script>
+    $(function (){
+      const data= [];
+      $.post("SearchAllFeedbackServlet",{},function (reply,status) {
+                //alert(status);
+                const len=reply.length;
+                for(var i=0;i<len;i++)
+                {
+                  data.push(reply[i]);
+                }
+                Update();
+                for(var i=0;i<len;i++){
+                  data.pop();
+                }
+              }
+      );
+      function Update(){
+
+        const tbody=document.getElementById("table-body")
+
+        data.forEach((item)=>{
+          // 创建新的表格行
+          const row = document.createElement("tr");
+
+          // 添加数据到新行
+          const columnOrder = ["id","username","content"];
+          columnOrder.forEach((propertyName) => {
+            const value = item[propertyName];
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+          });
+          // 将表格行添加到表格的 tbody 中
+          tbody.appendChild(row);
+        });
+      };
+
+    });
+    </script>
+</head>
+
+<body>
+
+<!-------------------------背景--------------------------------------->
+<div class="bg1">
+  <img id="pg1" class="mySlides" src="image/xmu6.jpg" width="400" height="600">
+</div>
+<!--------------------------上方导航栏------------------------>
+<div class="nav-bar">
+  <p><nav>
+  <ul>
+    <li><a href="manager_page.html" title="首页" style="font-size: 25px;color: #2f3640">首页</a></li>
+    <li><a href="manager_borrowRecord.html" title="功能大厅" style="font-size: 25px;color: #2f3640">功能大厅</a></li>
+    <li><a href="manager_feedback.html" title="用户反馈管理" style="font-size: 25px;color: chocolate">用户反馈管理</a></li>
+  </ul>
+</nav>
+  </p>
+</div>
+
+<div class="about-us">
+  <p style="font-weight: bold;color: #988fc7;font-size: 20px">以下是用户的反馈：</p>
+</div>
+
+<!------------------------反馈结果-------------->
+<div class="feedback" id="container">
+    <table class="my-table">
+      <thead>
+      <tr><!--表头-->
+        <th>序号(id)</th>
+        <th>用户(username)</th>
+        <th>反馈信息(content)</th>
+      </tr>
+      </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!---------------------------------------------------当前为借书界面-------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户</title>
+    <link rel="stylesheet" type="text/css" href="css/manager_userList_change.css">
+    <script src="js/manager_userList_change.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+
+            $("#tijiao").click(function () {
+                $.post("UpdateUserServlet", $("#XiuGaiUser").serialize(), function (data) {   //location.href = "hello.html"
+                    if (data.flag) {
+                        alert("修改成功");
+                        location.href = "manager_userList.html";
+                    } else {
+                        alert("修改失败");
+                    }
+                })
+            })
+        })
+
+
+    </script>
+</head>
+
+<!--开始————————————————————————————————————————————————————-->
+<body>
+<!--------------------------上方导航栏------------------------>
+<p>
+<nav>
+    <ul>
+        <li><a href="manager_page.html" title="首页" target="_blank" style="font-size: 20px;color: #2f3640">首页</a></li>
+        <li><a href="manager_userList.html" title="用户列表"  style="font-size: 20px;color: #2f3640">用户列表</a></li>
+        <li><a href="manager_userList_change.html" title="修改用户"  style="font-size: 20px;color: coral">修改用户</a></li>
+    </ul>
+</nav>
+</p>
+
+<!--搜索框 ---------------------------------->
+
+
+<!--已经借阅的书籍---用于续借操作-------------------------->
+<div class="table-container">
+
+    <!--结果表------------------------------------>
+    <div class="wrap">
+        <div class="login-wrap">
+            <div class="login-title">
+                修改用户信息
+            </div>
+            <form target="form" id="XiuGaiUser" action="UpdateUserServlet" method="POST">
+                <div class="login-form">
+                    <div class="login-title1">
+                        <div>用 户 账 号 :<input  type="text" name="post_username"  class="login-input" id="post_username"> </div>
+                        <div>用 户 密 码 :  <input  type="text" name="password"  class="login-input" id="password"></div>
+                        <div>用 户 姓 名 :  <input  type="text" name="name"  class="login-input" id="name"></div>
+                        <div>用 户 电 话 :  <input  type="text" name="phone"  class="login-input" id="phone"></div>
+                        <div>用 户 邮 箱:  <input  type="text" name="email"  class="login-input" id="email"></div>
+                        <div><input  type="text" name="pre_username"  id="pre_username"></div> <!---隐藏起来的pre_ISBN---->
+                        <input type="button" name="提交" value="提交" id="tijiao" class="login-submit"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

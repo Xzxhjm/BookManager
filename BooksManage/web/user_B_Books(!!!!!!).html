@@ -1,0 +1,67 @@
+
+<!---------------------------------------------------当前为借书界面-------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>功能大厅(用户)</title>
+    <link rel="stylesheet" type="text/css" href="css/user_B_Books(!!!!!!!!!).css">
+    <script src="js/user_B_Books(!!!!!!).js"></script>
+</head>
+
+<!--开始————————————————————————————————————————————————————-->
+<body>
+<!--------------------------上方导航栏------------------------>
+<p>
+<nav>
+    <ul>
+        <li><a href="user_page.html" title="首页" style="font-size: 20px;color: #2f3640">首页</a></li>
+        <li><a href="user_B_Books(!!!!!!).html" title="图书借阅" style="font-size: 20px;color: #988fc7">图书借阅</a></li>
+        <li><a href="user_returnBooks(#).html" title="图书退还" style="font-size: 20px;color: #2f3640">图书退还</a></li>
+        <li><a href="user_bookList.html" title="图书查询" style="font-size: 20px;color: #2f3640">图书查询</a></li>
+        <li><a href="user_Renew_Books(!!!!!).html" title="图书续借" style="font-size: 20px;color: #2f3640">图书续借</a> </li>
+    </ul>
+</nav>
+</p>
+
+    <!--搜索框 ---------------------------------->
+    <div class="search-box">
+        <input class="search-txt" type="text" placeholder="请输入搜索内容"  id="search-bar">
+        <button class="search-btn" onclick="show_res()">
+            <img class="custom-button" src="image/search.png">
+        </button>
+        <div class="search-option-wrapper">
+            <select id="search-option" onchange="option_change()">
+                <option value="fuzzy">综合</option>
+                <option value="book-number">书号</option>
+                <option value="book-title">书名</option>
+                <option value="author">作者</option>
+            </select>
+        </div>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <!--已经借阅的书籍---用于续借操作-------------------------->
+    <div class="table-container">
+        <!--结果表------------------------------------>
+        <table class="res-table">
+            <thead>
+            <tr><!--表头-->
+                <th>书号(ISBN)</th>
+                <th>书名(BookName)</th>
+                <th>作者(Author)</th>
+                <th>出版社(publisher)</th>
+                <th>价格(price)</th>
+                <th>内容简介(content)</th>
+                <th>库存(stock)</th>
+                <th>是否借阅(borrow)</th>
+            </tr>
+            </thead>
+            <tbody id="res-table-body">
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+</html>

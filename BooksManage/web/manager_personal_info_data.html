@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息(个人资料)</title>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            const username=localStorage.getItem("username");
+            //alert(username);
+            $.post("SearchAdminServlet",{'username':username}, function (data) {   //location.href = "hello.html"
+                //alert(data.username)
+                localStorage.setItem('username',data.username);
+                localStorage.setItem('password',data.password);
+                localStorage.setItem('realname',data.name);
+                localStorage.setItem('name',data.name);
+                localStorage.setItem('phone',data.phone);
+                localStorage.setItem('email',data.email);
+                ShowMessage();
+            })
+            function ShowMessage()//
+            {
+                const username = localStorage.getItem("name");
+                const user_info = document.getElementById("user_info");
+                document.getElementById('1').value=localStorage.getItem("username");
+                document.getElementById('2').value=localStorage.getItem("password");
+                document.getElementById('3').value=localStorage.getItem("realname");
+                document.getElementById('4').value=localStorage.getItem("phone");
+                document.getElementById('5').value=localStorage.getItem("email");
+                user_info.innerText = username+",你好!";
+            }
+        })
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/manager_personal_info_data.css"><!---使用了user_personal_info_2.css的风格-->
+
+</head>
+<body>
+<!------------------------导航栏------------------>
+<div class="nav-bar">
+    <p>
+    <nav>
+        <ul>
+            <li><a href="manager_page.html" title="首页" style="font-size: 25px;color: #2f3640">首页</a></li>
+            <li><a id="a1" href="manager_borrowRecord.html" title="功能大厅" target="_blank" style="font-size: 25px;color: #2f3640">功能大厅</a> </li>
+            <li><a id="a2" href="manager_personal_info_data.html" title="个人信息" target="_blank" style="font-size: 25px;color: chocolate">个人信息</a></li>
+            <li><a id="user_info" title="用户信息" style="font-size: 25px;color: #2f3640">登录</a></li>
+        </ul>
+    </nav>
+    </p>
+</div>
+
+<!------------------------个人信息              当前是“个人资料”界面---------------->
+<div class="personal_info">
+    <h1>您的个人信息:</h1>
+    <a id="a_2_2" href="manager_personal_info_data.html" title="点击修改" style="font-size: 25px;color:burlywood;font-weight: bold">个人资料</a>
+    <a id="a_2_1" href="manager_personal_info_change.html" title="点击修改" style="font-size: 25px;color: #2f3640">点击修改</a>
+
+    <div class="info">
+        <p class="pl">
+            <label  class="label_style">管理员账号:</label>
+            <input readonly  type="text" style="color: #2f3640;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" class="line_input" id="1"></p>
+        <p class="pl">
+            <label  class="label_style">密码:</label>
+            <input readonly  type="text" style="color: #2f3640;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" class="line_input" id="2"></p>
+        <p class="pl">
+            <label  class="label_style">您的真实姓名:</label>
+            <input readonly  type="text" style="color: #2f3640;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" class="line_input" id="3"></p>
+        <p class="pl">
+            <label  class="label_style">您的联系电话:</label>
+            <input readonly  type="text" style="color: #2f3640;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" class="line_input" id="4"></p>
+        <p class="pl">
+            <label  class="label_style">您的电子邮件:</label>
+            <input readonly  type="text" style="color: #2f3640;font-size: 20px;font-weight: bold;font-style: oblique" width="100%" class="line_input" id="5"></p>
+    </div>
+</div>
+
+<!--------------------------------背景设计------------>
+<div class="pubu">
+    <img src="image/pubu.gif" height="600" width="400">
+</div>
+
+</body>
+</html>

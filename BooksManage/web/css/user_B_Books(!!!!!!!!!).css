@@ -1,0 +1,181 @@
+
+body{
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../image/B_books2.jpg");
+    background-repeat: no-repeat;
+}
+
+/*tip1*/
+.tip1{
+    position: absolute;
+    left: 10%;
+    top: 125px;
+}
+/*--------------------导航栏设计---------------*/
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+
+/*搜索框设计-----------------------------------------*/
+.search-box{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: flex-end;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:#2f3640;
+    height: 38px;
+    border-radius: 60px;
+    padding: 10px;
+}
+
+.search-box:hover > .search-txt{
+    width: 240px;
+    padding: 0 6px;
+}
+.search-option-wrapper{
+    margin-left: 10px;
+    order: 2;
+}
+.search-option-wrapper select{
+    background-color: cadetblue;
+}
+.search-box:hover > .search-btn{
+    background: white;
+}
+
+.search-btn{
+    margin-left: 10px;
+    color: #988fc7;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.search-txt{
+    border:none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+image.custom-icon{
+    width: 30px;
+    height: 30px;
+    fill: red;
+    transition: color 0.3s;
+}
+image.custom-icon:hover{
+    fill: cadetblue;
+}
+
+/*菜单设计----------------------------------------------------*/
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-input {
+    width: 200px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#search-option {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#search-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+/*搜索结果*/
+.search-result {
+    margin-top: 20px;
+}
+
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.book-table th,
+.book-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+/*表格----------------------------------------------------*/
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.table-container{
+    position: relative;
+}
+.my-table{/*续借表*/
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    left: 24%;
+    top: 200px;
+    transform: translate(-50%);
+}
+.res-table{/*查询结果*/
+    position: absolute;
+    width: 800px;
+    top: 200px;
+    left: 25%;
+}
+

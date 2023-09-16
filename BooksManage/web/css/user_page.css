@@ -1,0 +1,86 @@
+/*选择界面-借书、还书、查询*/
+.info{
+    height: 40vh;
+    width: 80dvh;
+    background-color: #988fc7;
+    position: absolute;
+    top: 850px;
+    left: 680px;
+}
+
+.image-group{
+    position: absolute;
+    top: 1250px;
+    left: 680px;
+}
+.image-group img{
+    margin-right: 70px;;
+}
+/*--------------------导航栏设计---------------*/
+.nav-bar{
+    position: absolute;
+    left: 300px;
+}
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+/*--------------视频设置------------*/
+.my-video{
+    position:absolute;
+    top: 100px;
+    left: 100px;
+}
+/*-------------背景设置--------------*/
+.background1{
+    background-color: #f4f4f4; /* 设置背景颜色 */
+    background-image: url("../image/xmu12.jpg"); /* 设置背景图片 */
+    background-size: cover; /* 背景图片适应整个div */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+    background-position: center center; /* 将背景图片居中显示 */
+    height: 100vh;
+}
+/*--------------轮播图片-----------------*/
+.bg1{
+    position: absolute;
+    left: 8%;
+    top: 110%;
+}
+
+/*--------------退出登录----------*/
+.dropdown {
+    top: 10px;
+    left: 140px;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: darkcyan;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+

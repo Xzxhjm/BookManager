@@ -1,0 +1,80 @@
+body{
+    background-image: url("../image/B_books2.jpg");
+    background-size: cover;
+}
+
+/*--------------------导航栏设计---------------*/
+.nav-bar{
+    position: absolute;
+    left: 300px;
+}
+nav{
+    font-size:20px;
+    float:initial;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0 ;
+}
+nav ul li {
+    float:left;
+    display: inline;
+}
+nav ul li a {
+    float: left;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+
+/*------------------------个人信息-------------------*/
+.personal_info{
+    position: absolute;
+    width: 1000px;
+    height: 600px;
+    top: 100px;
+    left: 15%
+}
+.info{
+    position: relative;
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+.info input{
+    position: absolute;
+    left: 200px;
+}
+.label_style{
+    font-size: 20px;
+}
+.info .pl{/*---pl间距-----*/
+    margin-bottom: 50px;
+}
+#save-btn{
+    position: absolute;
+    top: 380px;
+    left: 400px;
+}
+/*---------------------------------------------*/
+#a_2_2{/*----个人资料----*/
+    position: absolute;
+    text-decoration: none;
+    top: 26px;
+    left: 30%;
+}
+#a_2_1{/*---点击修改---*/
+    position: absolute;
+    text-decoration: none;
+    top: 26px;
+    left: 60%;
+
+}
+
+/*-------------------背景设计----------------*/
+.pubu{
+    position: absolute;
+    top: 20%;
+    left: 72%;
+}
